@@ -116,8 +116,7 @@ def train_gae(data, model, hyperparameters):
     gene_train_data = data[1]
 
     num_cells = cell_train_data.x.shape[0]
-    # intracellular_gene_mask = create_intracellular_gene_mask(num_cells, num_genespercell)
-    # mse = torch.nn.MSELoss()
+
 
     test_roc_scores = []
     test_ap_scores = []
@@ -176,10 +175,10 @@ def train_gae(data, model, hyperparameters):
             tb_writer.add_scalar(tags[1], test_recon_loss, epoch)
             tb_writer.add_scalar(tags[2], test_acc, epoch)
             tb_writer.add_scalar(tags[3], optimizer.param_groups[0]["lr"], epoch)
-    metrics_df = pd.DataFrame({"Epoch":range(num_epochs), f"CLARIFY Train AUROC":train_auroc_scores, f"CLARIFY Train AP":train_ap_scores,
-                               f"CLARIFY Test AP":test_ap_scores, f"CLARIFY Test ROC": test_roc_scores, f"CLARIFY Test AUPRC": test_auprc_scores,
-                               f"CLARIFY Test ACC":test_ACC_scores, f"CLARIFY test Recall":test_recall_scores, 
-                               f"CLARIFY Test f1-score":test_f1_scores, f"CLARIFT Test Precision":test_precision_scores})
+    metrics_df = pd.DataFrame({"Epoch":range(num_epochs), f"Train AUROC":train_auroc_scores, f"Train AP":train_ap_scores,
+                               f"Test AP":test_ap_scores, f"Test ROC": test_roc_scores, f"Test AUPRC": test_auprc_scores,
+                               f"Test ACC":test_ACC_scores, f"Test Recall":test_recall_scores, 
+                               f"Test f1-score":test_f1_scores, f"Test Precision":test_precision_scores})
 
     return model, metrics_df
 

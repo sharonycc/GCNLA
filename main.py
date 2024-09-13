@@ -17,18 +17,17 @@ from torch_geometric.nn import GAE
 
 debug = False
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-# device = torch.device("cpu")
 print("using {} device.".format(device))
 
 
 def parse_arguments():
-    parser = argparse.ArgumentParser(description='clarifyGAE arguments')
-    parser.add_argument("-m", "--mode", type=str, default="preprocess,train,test", help="clarifyGAE mode:preprocess,train,test")
+    parser = argparse.ArgumentParser(description='GCNLA arguments')
+    parser.add_argument("-m", "--mode", type=str, default="preprocess,train,test", help="GCNLA mode:preprocess,train,test")
     parser.add_argument("-i", "--inputdirpath", type=str, default="./data/seqFISH/seqfish_dataframe.csv",
                         help="Input directory path where ST data is stored")
     parser.add_argument("-o", "--outputdirpath", type=str, default="./out/seqfish/ceshi/",
                         help="Output directory path where result will be stored")
-    parser.add_argument("-s", "--studyname", type=str, default="seqFISH", help="clarifyGAE study name")
+    parser.add_argument("-s", "--studyname", type=str, default="seqFISH", help="GCNLA study name")
     parser.add_argument("-t", "--split", type=float, default=0.3, help="of test edge [0,1)")
     parser.add_argument("-n", "--numgenespercell", type=int, default=120,
                         help="Number of genes in each gene regulatory network")
@@ -53,10 +52,10 @@ def preprocess(st_data, num_nearestneighbors, ownadjacencypath=None):
     return celllevel_adj
 
 
-def build_clarifyGAE_pytorch(data, hyperparams=None):
+def build_GCNLA_pytorch(data, hyperparams=None):
     _, num_cellfeatures = data[0].x.shape[0], data[0].x.shape[1]
     hidden_dim = hyperparams["concat_hidden_dim"] // 2
-    cellEncoder = models.GraphTrans_Encoder(num_cellfeatures, hidden_dim)#创建实例对象
+    cellEncoder = models.GraphTrans_Encoder(num_cellfeatures, hidden_dim)
     CellTEncoder = models.CellTEncoder(GraphTrans_Encoder=cellEncoder)
     gae = GAE(CellTEncoder)
 
@@ -65,7 +64,7 @@ def build_clarifyGAE_pytorch(data, hyperparams=None):
 
 def main():
     console = Console()
-    with console.status("Clarify booting up...") as status:
+    with console.status("GCNLA booting up...") as status:
         status.update(spinner="aesthetic", spinner_style="cyan")
         time.sleep(4)
         status.update(status="[cyan] Parsing arguments...")
@@ -154,9 +153,9 @@ def main():
         if not os.path.exists(embedding_output_path):
             os.mkdir(embedding_output_path)
 
-        print("\n#------------------------------- ClarifyGAE Training -----------------------------#\n")
+        print("\n#-------------------------------------- Training ------------------------------------#\n")
         data = (celllevel_data)
-        model = build_clarifyGAE_pytorch(data, hyperparameters).to(device)
+        model = build_GCNLA_pytorch(data, hyperparameters).to(device)
         if hyperparameters["optimizer"] == "adam":
             hyperparameters["optimizer"] = torch.optim.Adam(model.parameters(), lr=0.001),
         split = hyperparameters["split"]
