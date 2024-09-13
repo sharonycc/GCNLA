@@ -1,5 +1,5 @@
 
-#GCNLA
+# GCNLA
 
 <p align="center">
 <img src="./data/GCNLA/over.png" width="80%" height="80%">
