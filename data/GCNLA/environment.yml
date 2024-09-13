@@ -1,4 +1,4 @@
-name: two-gpu
+name: GCNLA
 channels:
   - pytorch
   - nvidia
@@ -280,4 +280,4 @@ dependencies:
       - widgetsnbextension==3.6.6
       - wrapt==1.15.0
       - zipp==3.17.0
-prefix: D:\anaconda3\envs\two-gpu
+prefix: D:\anaconda3\envs\GCNLA
