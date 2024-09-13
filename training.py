@@ -72,13 +72,10 @@ def create_pyg_data(preprocessing_output_folderpath, split=0.1, false_edges=None
             fn = false_edges["fn"]
 
             if fn != 0:
-                """
-                根据指定的假阴性率 (fn) 来删除一部分真实边，模拟真实数据中可能存在的错误。
-                """
                 new_indices = train_cell_level_data.edge_label.clone()
                 old_edge_indices = np.argwhere(train_cell_level_data.edge_label == 1).squeeze()
                 print(f"old_edge_position2:{old_edge_indices.shape}")
-                new_neg_edge_indices = remove_real_edges(old_edge_indices, fn).long()   #去除真实边，将结果转换为长整型数据类型
+                new_neg_edge_indices = remove_real_edges(old_edge_indices, fn).long()  
                 new_indices[new_neg_edge_indices] = 0
                 train_cell_level_data.edge_label = new_indices
 
@@ -198,7 +195,6 @@ def traintrain(model, z, pos_edge_index, neg_edge_index):
     y, pred = y.detach().cpu().numpy(), pred.detach().cpu().numpy()
     precision, recall, thresholds = precision_recall_curve(y, pred)
     f1_scores = 2 * (precision * recall) / (precision + recall)
-    # 找到使 F1 分数最大化的阈值
     best_threshold_index = np.argmax(f1_scores)
     best_threshold = thresholds[best_threshold_index]
     print(f"\ny_train_len:{len(y)}")
