@@ -59,7 +59,6 @@ The first row of parameters are necessary
 
 This second row of parameters have defaults set and are not needed.
 
-*  `-n NUMGENESPERCELL, --numgenespercell` Number of genes in each gene regulatory network (default 45)
 *  `-k NEARESTNEIGHBORS, --nearestneighbors` Number of nearest neighbors for each cell (default 5)
 *  `-l LRDATABASE, --lrdatabase` 0/1/2 for which Ligand-Receptor Database to use (default 0 corresponds to mouse DB)
 *  `--fp FP`               (experimentation only) add # of fake edges to train set [0,1)
