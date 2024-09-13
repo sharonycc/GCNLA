@@ -25,15 +25,15 @@ def parse_arguments():
     parser.add_argument("-m", "--mode", type=str, default="preprocess,train,test", help="GCNLA mode:preprocess,train,test")
     parser.add_argument("-i", "--inputdirpath", type=str, default="./data/seqFISH/seqfish_dataframe.csv",
                         help="Input directory path where ST data is stored")
-    parser.add_argument("-o", "--outputdirpath", type=str, default="./out/seqfish/ceshi/",
+    parser.add_argument("-o", "--outputdirpath", type=str, default="./out/seqfish/",
                         help="Output directory path where result will be stored")
     parser.add_argument("-s", "--studyname", type=str, default="seqFISH", help="GCNLA study name")
     parser.add_argument("-t", "--split", type=float, default=0.3, help="of test edge [0,1)")
-    parser.add_argument("-n", "--numgenespercell", type=int, default=120,
+    parser.add_argument("-n", "--numgenespercell", type=int, default=200,
                         help="Number of genes in each gene regulatory network")
     parser.add_argument("-k", "--nearestneighbors", type=int, default=5,
                         help="Number of nearest neighbors for each cell")
-    parser.add_argument("-l", "--lrdatabase", type=int, default=0, help="0CellTalkDB Mouse/1Human/2scMultiSim")
+    parser.add_argument("-l", "--lrdatabase", type=int, default=0")
     parser.add_argument("-fp", type=float, default=0, help="false positive test edges[0,1),experimentation")
     parser.add_argument("-fn", type=float, default=0, help="false negative test edges[0,1),experimentation")
     parser.add_argument("-a", "--ownadjacencypath", type=str, help="Using your own cell level adjacency(give path)")
@@ -107,7 +107,7 @@ def main():
         print("\n#------------------------------------ Preprocessing ----------------------------------#\n")
         if not os.path.exists(preprocess_output_path):
             os.mkdir(preprocess_output_path)
-        celllevel_features = st_data.drop(["Cell_ID", "Cell_Type", "X", "Y"], axis=1).values    #删除4列后的值1597*125
+        celllevel_features = st_data.drop(["Cell_ID", "Cell_Type", "X", "Y"], axis=1).values    
         celllevel_adj = preprocess(selected_st_data, num_nearestneighbors, ownadjacencypath)
         celllevel_edgelist = preprocessing.convert_adjacencylist2edgelist(celllevel_adj)
 
