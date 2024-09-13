@@ -28,7 +28,7 @@ conda create --name GCNLA python=3.8.18
 Now, activate your environment and utilize the requirements.txt file to install non pytorch dependencies
 ```
 conda activate GCNLA
-pip install -r requirements.txt
+conda env create -n env_name -f environment.yml
 ```
 
 
