@@ -2,7 +2,7 @@
 # GCNLA
 
 <p align="center">
-<img src="./data/GCNLA/over.png" width="80%" height="80%">
+<img src="./data/GCNLA/over.png" width="100%" height="100%">
 <hr></hr>
 </p>
 
