@@ -9,7 +9,7 @@
 
 
 ## GCNLA overview
-GCNLA is used to infer cell-cell interactions based on transcriptomics data and spatial location information.  In this work, we propose a network architecture based on graph convolution network and long short-term memory attention module-GCNLA, which contains a graph convolution layer, a long short-term memory network, an attention module, and residual connections.
+GCNLA is used to infer cell-cell interactions based on transcriptomics data and spatial location information. 
 
 ## Installation & Setup
 
