@@ -197,7 +197,6 @@ def traintrain(model, z, pos_edge_index, neg_edge_index):
     f1_scores = 2 * (precision * recall) / (precision + recall)
     best_threshold_index = np.argmax(f1_scores)
     best_threshold = thresholds[best_threshold_index]
-    print(f"\ny_train_len:{len(y)}")
 
     return roc_auc_score(y, pred), average_precision_score(y, pred), best_threshold 
 
