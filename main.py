@@ -19,7 +19,7 @@ debug = False
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print("using {} device.".format(device))
 
-
+ 
 def parse_arguments():
     parser = argparse.ArgumentParser(description='GCNLA arguments')
     parser.add_argument("-m", "--mode", type=str, default="preprocess,train,test", help="GCNLA mode:preprocess,train,test")
