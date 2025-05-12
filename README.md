@@ -6,7 +6,7 @@
 <hr></hr>
 </p>
 
-
+ 
 
 ## GCNLA overview
 GCNLA is used to infer cell-cell interactions based on transcriptomics data and spatial location information. 
