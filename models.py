@@ -16,7 +16,7 @@ class InnerProductDecoder(torch.nn.Module):
         return torch.sigmoid(value) if sigmoid else value
 
 
-
+ 
 
 class Attention(nn.Module):
     def __init__(self, hidden_size, time_steps):
